@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommended Internships - AI Internship Recommendation</title>
+
+    <!-- ✅ CSS PATH (correct for Express static) -->
+    <link rel="stylesheet" href="/result_page_react.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Background -->
+    <div class="bg-image"></div>
+    <div class="bg-overlay"></div>
+
+    <!-- Floating Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Header -->
+    <header class="navbar">
+        <div class="navbar-inner">
+            <a href="/new_home_page_react.html" class="logo">
+                <span class="logo-icon">🎯</span>
+                <span class="logo-text">InternAI</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="/new_home_page_react.html">Home</a>
+                <a href="/new_details_page_react.html">Details</a>
+                <a href="#" class="active">Results</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="page-content">
+
+        <div class="page-header">
+            <span class="badge"><span class="pulse-dot"></span> AI Matched</span>
+            <h1>Recommended <span class="text-gradient">Internships</span></h1>
+            <p class="subtitle">Based on your profile, here are your top matches.</p>
+        </div>
+
+        <!-- ✅ RESULTS GRID -->
+        <div class="results-grid" id="results"></div>
+
+        <!-- Back button -->
+        <div class="back-section">
+            <a href="/new_details_page_react.html" class="btn-back">← Modify Search</a>
+        </div>
+
+    </main>
+
+    <!-- ✅ MAIN SCRIPT -->
+    <script>
+        const results = JSON.parse(localStorage.getItem("results"));
+        const container = document.getElementById("results");
+
+        if (results && results.length > 0) {
+
+            results.forEach((item, index) => {
+
+                const card = document.createElement("div");
+                card.className = "result-card glass-card";
+
+                card.innerHTML = `
+                    ${index === 0 ? '<span style="color: gold; font-weight: bold;">🏆 Best Match</span>' : ''}
+
+                    <div class="card-header">
+                        <div class="card-badge badge-match">
+                            ${(item.match_score * 100).toFixed(1)}% Match
+                        </div>
+                        <div class="card-badge badge-mode">
+                            ${item.mode}
+                        </div>
+                    </div>
+
+                    <h3 class="card-title">${item.title}</h3>
+
+                    <div class="card-meta">
+                        <span>🏛️ ${item.organization}</span>
+                        <span>📍 ${item.location}</span>
+                        <span>⏱️ ${item.duration_weeks || "N/A"} Weeks</span>
+                    </div>
+
+                    <p><strong>Domain:</strong> ${item.domain}</p>
+                    <p><strong>Skills:</strong> ${item.skills}</p>
+                    <p>${item.description}</p>
+
+                    <a href="#" class="btn-apply">Apply Now →</a>
+                `;
+
+                container.appendChild(card);
+            });
+
+        } else {
+            container.innerHTML = "<h2 style='text-align:center;'>No Results Found</h2>";
+        }
+    </script>
+
+</body>
+</html>

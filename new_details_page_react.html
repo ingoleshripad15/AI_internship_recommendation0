@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fill Your Details - AI Internship Recommendation</title>
+    <link rel="stylesheet" href="/details_page_react.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #00bcd4;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin: 10px auto;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+
+</head>
+<body>
+
+    <!-- Background -->
+    <div class="bg-image"></div>
+    <div class="bg-overlay"></div>
+
+    <!-- Floating Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="navbar-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🎯</span>
+                <span class="logo-text">InternAI</span>
+            </a>
+            <nav class="nav-links">
+                <a href="new_home_page_react.html">Home</a>
+                <a href="new_details_page_react.html" class="active">Details</a>
+                <a href="new_result_page_react.html">Results</a>
+            </nav>
+            <div class="nav-auth">
+                <a href="#" class="btn-outline-sm">Log In</a>
+                <a href="index.html" class="btn-primary-sm">Sign Up</a>
+            </div>
+            <!-- Mobile menu toggle -->
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <!-- Mobile nav -->
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">Home</a>
+            <a href="#">Details</a>
+            <a href="result.html">Results</a>
+            <a href="#">Log In</a>
+            <a href="index.html">Sign Up</a>
+        </nav>
+    </header>
+
+    <!-- Page Content -->
+    <main class="page-content">
+        <div class="page-header">
+            <span class="badge"><span class="pulse-dot"></span> Step 2 of 3</span>
+            <h1>Fill Your <span class="text-gradient">Details</span></h1>
+            <p class="subtitle">Tell us about yourself so we can find the perfect internship match.</p>
+        </div>
+<div id="loader" style="display:none; text-align:center;">
+    <div class="spinner"></div>
+    <p>Finding best internships...</p>
+</div>
+
+        <form class="details-form glass-card" id="internshipForm" action="http://127.0.0.1:3000/recommend" method="post">
+            
+            <!-- Domain -->
+            <div class="form-group">
+                <label for="domain">Interested Domain <span class="required">*</span></label>
+                <input type="text" id="domain" name="domain" placeholder="e.g. Data Science, Cyber Security" required>
+            </div>
+
+            <!-- Skills -->
+            <div class="form-group">
+                <label for="skills">Skills</label>
+                <input type="text" id="skills" name="skills" placeholder="e.g. Python, SQL, Machine Learning">
+            </div>
+
+            <!-- Two columns -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="education">Education Level</label>
+                    <select id="education" name="education">
+                        <option value="Any">Any</option>
+                        <option value="Undergraduate">Undergraduate</option>
+                        <option value="Postgraduate">Postgraduate</option>
+                        <option value="Diploma">Diploma</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="location">Preferred Location</label>
+                    <select id="location" name="location">
+                        <option value="Any">Any</option>
+                        <option value="Remote">Remote</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Bengaluru">Bengaluru</option>
+                        <option value="Pune">Pune</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Internship Mode -->
+            <div class="form-group">
+                <label>Internship Mode</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="mode" value="Any" checked>
+                        <span class="radio-custom"></span> Any
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="mode" value="Remote">
+                        <span class="radio-custom"></span> Remote
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="mode" value="Onsite">
+                        <span class="radio-custom"></span> Onsite
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="mode" value="Hybrid">
+                        <span class="radio-custom"></span> Hybrid
+                    </label>
+                </div>
+            </div>
+
+            <!-- Two columns -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="duration">Duration (Weeks)</label>
+                    <select id="duration" name="duration">
+                        <option value="Any">Any</option>
+                        <option value="4">4 Weeks</option>
+                        <option value="6">6 Weeks</option>
+                        <option value="8">8 Weeks</option>
+                        <option value="12">12 Weeks</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="ministry">Preferred Ministry</label>
+                    <select id="ministry" name="ministry">
+                        <option value="Any">Any</option>
+                        <option value="MeitY">MeitY</option>
+                        <option value="MoE">Ministry of Education</option>
+                        <option value="NITI Aayog">NITI Aayog</option>
+                        <option value="MoHFW">MoHFW</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="button" class="btn-submit" onclick="getRecommendation()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                Get Recommendations
+            </button>
+        </form>
+    </main>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobileNav').classList.toggle('open');
+        }
+    </script>
+
+    <script>
+const form = document.getElementById("internshipForm");
+
+form.addEventListener("submit", function(event) {
+
+    event.preventDefault(); // stop instant reload
+
+    // show loader
+    document.getElementById("loader").style.display = "block";
+
+    // small delay so user can see loader
+    setTimeout(() => {
+        form.submit();
+    }, 1000); // 1 second
+});
+</script>
+ 
+<script>
+function getRecommendation() {
+
+    const domain = document.getElementById("domain").value;
+    const skills = document.getElementById("skills").value;
+    const education = document.getElementById("education").value;
+    const location = document.getElementById("location").value;
+
+    const mode = document.querySelector('input[name="mode"]:checked').value;
+
+    // show loader
+    document.getElementById("loader").style.display = "block";
+
+    fetch("/recommend", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "include",
+        body: JSON.stringify({
+            domain,
+            skills,
+            education,
+            location,
+            mode
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        localStorage.setItem("results", JSON.stringify(data));
+        window.location.href = "/new_result_page_react.html";
+    })
+    .catch(err => console.log(err));
+}
+</script>
+</body>
+</html>
